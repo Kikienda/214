@@ -172,6 +172,8 @@ const targetsData = [
 
 targetsData.forEach((name, index) => {
 
+      console.log("Всего таргетов в массиве:", targetsData.length);
+
   const target = document.createElement("a-entity");
   target.setAttribute("mindar-image-target", `targetIndex: ${index}`);
   target.setAttribute("id", `target${index}`);
