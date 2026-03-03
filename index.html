@@ -185,6 +185,9 @@ targetsData.forEach((name, index) => {
 
   // targetFound
   target.addEventListener("targetFound", () => {
+
+      console.log("Нашёл:", name);
+        
     activeAnchor = anchor;
     isTracking = true;
 
