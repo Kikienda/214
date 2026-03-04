@@ -196,15 +196,15 @@ arUI.style.top = `${y}px`;
 
 target1.addEventListener("targetFound", () => {
 
-activeAnchor = anchor1;
-isTracking = true;
+  activeAnchor = anchor1;
+  isTracking = true;
 
-arUI.style.display = "flex";
-anchor1.setAttribute("ui-follow", "");
+  arUI.style.display = "flex";
+  anchor1.setAttribute("ui-follow", "");
 
-document.querySelector("#modal h2").innerText = "Экспонат 1";
-document.querySelector("#modal p").innerText =
-"Описание первого экспоната.";
+  document.querySelector("#modal h2").innerText = "ШАХМАТНАЯ ДОСКА";
+  document.querySelector("#modal p").innerText =
+  "ДЛЯ 1 КОМАНДЫ\n\nШахматная доска:\nО боги, БОГИ! Вы меня нашли, теперь следует послушать вашего сопровождающего и отправиться в 212 кабинет после его задания.";
 
 });
 
@@ -225,15 +225,15 @@ anchor1.removeAttribute("ui-follow");
 
 target2.addEventListener("targetFound", () => {
 
-activeAnchor = anchor2;
-isTracking = true;
+  activeAnchor = anchor2;
+  isTracking = true;
 
-arUI.style.display = "flex";
-anchor2.setAttribute("ui-follow", "");
+  arUI.style.display = "flex";
+  anchor2.setAttribute("ui-follow", "");
 
-document.querySelector("#modal h2").innerText = "Экспонат 2";
-document.querySelector("#modal p").innerText =
-"Описание второго экспоната.";
+  document.querySelector("#modal h2").innerText = "СТРЕЛКОВЫЙ ТИР";
+  document.querySelector("#modal p").innerText =
+  "ДЛЯ 2 КОМАНДЫ\n\nСтрелковый тир:\nДобрый день дорогие друзья, ваша задача слушать вашего сопровождающего как икону.";
 
 });
 
@@ -259,9 +259,9 @@ target3.addEventListener("targetFound", () => {
   arUI.style.display = "flex";
   anchor3.setAttribute("ui-follow", "");
 
-  document.querySelector("#modal h2").innerText = "Экспонат 3";
+  document.querySelector("#modal h2").innerText = "ОГНЕТУШИТЕЛЬ";
   document.querySelector("#modal p").innerText =
-    "Описание третьего экспоната.";
+  "ДЛЯ 1 КОМАНДЫ\n\nОгнетушитель:\nЭй Эй Эй, вижу вы пришли от моего друга пули, пожалуй я задам вам загадку.\n\nКакой объект состоит из дерева и имеет 32 черные клетки и 32 белые?\n\nЕсли вы это поймёте то он наведёт вас на путь истинный!\n\n\nДЛЯ 2 КОМАНДЫ\n\nОгнетушитель:\nОтлично! Вы достигли меня, я призываю вас отправиться в тежелый путь, в самое пекло ада, подвал.";
 
 });
 
@@ -285,9 +285,9 @@ target4.addEventListener("targetFound", () => {
   arUI.style.display = "flex";
   anchor4.setAttribute("ui-follow", "");
 
-  document.querySelector("#modal h2").innerText = "Экспонат 4";
+  document.querySelector("#modal h2").innerText = "ПОМАДА";
   document.querySelector("#modal p").innerText =
-    "Описание четвертого экспоната.";
+  "ДЛЯ 1 КОМАНДЫ\n\nПомада:\nВы были избраны мной, пулей!\nВаша цель сделать общее фото и по моему велению отправиться в библиотеку, там вас ожидают инструкции от моего хорошего друга!\n\n\nДЛЯ 2 КОМАНДЫ\n\nПомада:\nЯ пуля, моя задача вас направить и сделать фото около меня, без этого ничего не получиться!\nВы должны сделать общую фотографию и отправиться в 212.";
 
 });
 
