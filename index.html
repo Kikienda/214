@@ -120,13 +120,16 @@ html, body {
   vr-mode-ui="enabled: false"
   device-orientation-permission-ui="enabled: false">
 
-  <a-camera id="camera" position="0 0 0" look-controls="enabled: false"></a-camera>
+<a-camera id="camera" position="0 0 0" look-controls="enabled: false"></a-camera>
 
-  <!-- Таргеты будут создаваться автоматически -->
+<a-entity mindar-image-target="targetIndex: 0" id="target">
+<a-entity id="anchor" position="0 -0.4 0"></a-entity>
+</a-entity>
 
 </a-scene>
 
 <script>
+
 document.addEventListener("DOMContentLoaded", function() {
 
 const arUI = document.getElementById("arUI");
@@ -134,115 +137,80 @@ const camera = document.getElementById("camera");
 const modal = document.getElementById("modal");
 const openCard = document.getElementById("openCard");
 const backBtn = document.getElementById("backBtn");
-const scene = document.querySelector("a-scene");
 
-let activeAnchor = null;
+const target = document.getElementById("target");
+const anchor = document.getElementById("anchor");
+
 let isTracking = false;
 
-/* ============================= */
-/* СПИСОК 20 ТАРГЕТОВ */
-/* ============================= */
-
-const targetsData = [
-  "Таир",
-  "Бейбарыс",
-  "214 кабинет",
-  "Принтер",
-  "Стул серый",
-  "Кафедра",
-  "Стул черный",
-  "Мышь",
-  "Наушники",
-  "Белая штука",
-  "Огнетушитель",
-  "Градусник",
-  "Петля",
-  "Лампа",
-  "Олег",
-  "Вентеляция",
-  "Светокопи",
-  "Окно",
-  "Маршрутизатор",
-  "Не открывать"
-];
-
-/* ============================= */
-/* СОЗДАЁМ 20 ТАРГЕТОВ */
-/* ============================= */
-
-targetsData.forEach((name, index) => {
-
-      console.log("Всего таргетов в массиве:", targetsData.length);
-
-  const target = document.createElement("a-entity");
-  target.setAttribute("mindar-image-target", `targetIndex: ${index}`);
-  target.setAttribute("id", `target${index}`);
-
-  const anchor = document.createElement("a-entity");
-  anchor.setAttribute("position", "0 -0.4 0");
-  anchor.setAttribute("id", `anchor${index}`);
-
-  target.appendChild(anchor);
-  scene.appendChild(target);
-
-  // targetFound
-  target.addEventListener("targetFound", () => {
-
-      console.log("Нашёл targetIndex:", index);
-        
-    activeAnchor = anchor;
-    isTracking = true;
-
-    arUI.style.display = "flex";
-    anchor.setAttribute("ui-follow", "");
-
-    document.querySelector("#modal h2").innerText = name;
-    document.querySelector("#modal p").innerText =
-      "Информация о объекте: " + name;
-  });
-
-  // targetLost
-  target.addEventListener("targetLost", () => {
-    isTracking = false;
-    arUI.style.display = "none";
-    anchor.removeAttribute("ui-follow");
-  });
-
-});
 
 /* ============================= */
 /* FOLLOW COMPONENT */
 /* ============================= */
 
 AFRAME.registerComponent("ui-follow", {
-  tick: function () {
-    if (!isTracking || !activeAnchor) return;
+tick: function () {
 
-    const screenVector = new THREE.Vector3();
-    activeAnchor.object3D.getWorldPosition(screenVector);
-    screenVector.project(camera.getObject3D("camera"));
+if (!isTracking) return;
 
-    const x = (screenVector.x * 0.5 + 0.5) * window.innerWidth;
-    const y = (-screenVector.y * 0.5 + 0.5) * window.innerHeight;
+const screenVector = new THREE.Vector3();
 
-    arUI.style.left = `${x}px`;
-    arUI.style.top = `${y}px`;
-  }
+anchor.object3D.getWorldPosition(screenVector);
+screenVector.project(camera.getObject3D("camera"));
+
+const x = (screenVector.x * 0.5 + 0.5) * window.innerWidth;
+const y = (-screenVector.y * 0.5 + 0.5) * window.innerHeight;
+
+arUI.style.left = `${x}px`;
+arUI.style.top = `${y}px`;
+
+}
 });
+
+
+/* ============================= */
+/* TARGET EVENTS */
+/* ============================= */
+
+target.addEventListener("targetFound", () => {
+
+isTracking = true;
+
+arUI.style.display = "flex";
+
+anchor.setAttribute("ui-follow", "");
+
+});
+
+target.addEventListener("targetLost", () => {
+
+isTracking = false;
+
+arUI.style.display = "none";
+
+anchor.removeAttribute("ui-follow");
+
+});
+
 
 /* ============================= */
 /* UI */
 /* ============================= */
 
 openCard.addEventListener("click", () => {
-  modal.style.display = "block";
+
+modal.style.display = "block";
+
 });
 
 backBtn.addEventListener("click", () => {
-  modal.style.display = "none";
+
+modal.style.display = "none";
+
 });
 
 });
+
 </script>
 
 </body>
