@@ -132,6 +132,14 @@ html, body {
 <a-entity id="anchor2" position="0 -0.4 0"></a-entity>
 </a-entity>
 
+<a-entity id="target3" mindar-image-target="targetIndex: 2">
+  <a-entity id="anchor3" position="0 -0.4 0"></a-entity>
+</a-entity>
+
+<a-entity id="target4" mindar-image-target="targetIndex: 3">
+  <a-entity id="anchor4" position="0 -0.4 0"></a-entity>
+</a-entity>
+
 </a-scene>
 
 <script>
@@ -146,9 +154,13 @@ const backBtn = document.getElementById("backBtn");
 
 const target1 = document.getElementById("target1");
 const target2 = document.getElementById("target2");
+const target3 = document.getElementById("target3");
+const target4 = document.getElementById("target4");
 
 const anchor1 = document.getElementById("anchor1");
 const anchor2 = document.getElementById("anchor2");
+const anchor3 = document.getElementById("anchor3");
+const anchor4 = document.getElementById("anchor4");
 
 let activeAnchor = null;
 let isTracking = false;
@@ -232,6 +244,32 @@ isTracking = false;
 arUI.style.display = "none";
 
 anchor2.removeAttribute("ui-follow");
+
+});
+
+/* ===================== */
+/* TARGET 3 */
+/* ===================== */
+
+target3.addEventListener("targetFound", () => {
+
+  activeAnchor = anchor3;
+  isTracking = true;
+
+  arUI.style.display = "flex";
+  anchor3.setAttribute("ui-follow", "");
+
+  document.querySelector("#modal h2").innerText = "Экспонат 3";
+  document.querySelector("#modal p").innerText =
+    "Описание третьего экспоната.";
+
+});
+
+target3.addEventListener("targetLost", () => {
+
+  isTracking = false;
+  arUI.style.display = "none";
+  anchor3.removeAttribute("ui-follow");
 
 });
 
