@@ -273,6 +273,32 @@ target3.addEventListener("targetLost", () => {
 
 });
 
+/* ===================== */
+/* TARGET 4 */
+/* ===================== */
+
+target4.addEventListener("targetFound", () => {
+
+  activeAnchor = anchor4;
+  isTracking = true;
+
+  arUI.style.display = "flex";
+  anchor4.setAttribute("ui-follow", "");
+
+  document.querySelector("#modal h2").innerText = "Экспонат 4";
+  document.querySelector("#modal p").innerText =
+    "Описание четвертого экспоната.";
+
+});
+
+target4.addEventListener("targetLost", () => {
+
+  isTracking = false;
+  arUI.style.display = "none";
+  anchor4.removeAttribute("ui-follow");
+
+});
+
 
 /* ============================= */
 /* UI */
